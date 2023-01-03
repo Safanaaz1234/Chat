@@ -1,0 +1,82 @@
+REPL
+expression, underscore, variable, multilinecode/loop, editor mode
+
+FS 
+writeFileSync(file_name,data)
+appendFileSync(file_name,data)
+readFileSync(file_name)
+renameSync(oldfile_name, newfile_name)
+mkdirSync(folder_name)
+unlinkSync(file_name)
+rmdirSync(folder_name)
+writeFile(file_name,data,callback)
+appendFile(file_name,data,callback)
+readFile(file_name, encoding, callback)
+
+OS
+arch()
+freemem()
+totalmem()
+hostname()
+platform()
+tmpdir()
+type()
+
+Path
+dirname(file_path)
+extname(file_path)
+basename(file_path)
+parse(file_path)
+MyPath.name
+
+Export Import 
+myfile.js
+const {add,div,name} = require("./oper");
+console.log(add(1,2));
+console.log(div(8,4));
+console.log(name);
+
+oper.js
+const add = (a,b)=>{                                         
+ return a+b;}                                                   
+const div =(a,b)=>{
+  return a/b;}
+const name = "Safa";
+module.exports = {add,div,name};
+
+NPM modules
+chalk.blue.italic.underline.inverse("Hello")
+const res = validator.isEmail("safa@soha.com");
+console.log(res ? chalk.green.inverse(res):chalk.red.inverse(res));
+
+const http = require("http");
+const server = http.createServer((req,res)=>{
+ res.end("Hii there ;)"); });
+server.listen(9000,"127.0.0.1",()=>{
+  console.log("listening bhaiyaa");});
+
+To convert obj to json ->stringify
+To convert json to obj ->parse
+
+const server = http.createServer((req,res)=>{
+     if(req.url == "/"){
+             res.end("Yeppun");}
+     else if(req.url == "/contact"){
+             res.end("Gwenchana");
+     }else{                                                  
+              res.writeHead(404,{"Content-type":"text/html"});
+              res.end("<h4>404 page not found</h4>");
+        }
+});
+
+Pipe
+rstream.pipe(res);
+
+Events
+const EventEmitter = require("events");
+const event = new EventEmitter();
+event.on("abe",(sc,msg)=>{
+        console.log("Saranghaeo");
+        console.log(`status code is ${sc} and msg is ${msg}`);
+});
+event.emit("abe",404,"not found");
