@@ -1,0 +1,73 @@
+const express = require("express");
+const app = express();
+app.get("/",(req,res)=>{
+        res.send("Hii be motivated ");
+});
+app.get("/about",(req,res)=>{
+        res.status(200).send("This page is about ");
+});
+app.listen(8009,()=>{
+        console.log("I am listening");
+});
+
+res.json({
+   name:"safa",
+   age:19})
+
+const path = require("path");
+const staticPath = path.join(__dirname,"../public");
+app.use(express.static(staticPath));
+
+app.set("view engine","hbs");
+app.get("",(req,res)=>{
+        res.render("index");
+});
+
+const tempPath = path.join(__dirname,"/my_temp");
+app.set("views",tempPath);
+
+index.js 
+const hbs = require("hbs");
+const tempPath = path.join(__dirname,"/my_temp/views");
+const partialPath = path.join(__dirname,"my_temp/partials");
+hbs.registerPartials(partialPath);
+
+my_temp/partials/head.hbs
+<html>                                            <head></head>                                     <body>
+<u> Abe Saale Kya kar Raha hai? Mai header bol raha hu</u>                                          </body>                                           
+</html>
+
+my_temp/views/index.hbs
+<html>                                            <head></head>
+<body>                                             {{>head}}                                         
+<h6> Go ahead !!!! </h6>                         </body>
+</html>
+
+Error Page
+index.js
+app.get("*",(req,res)=>{
+        res.render("404",{
+                err:"Errrrrror"
+        });
+});
+my_temp/views/404.hbs
+<html>                                            
+<head></head>                                                    <body>
+{{>head}}
+{{err}}                                           
+</body>                                         
+</html>
+
+CSS
+my_temp/partials/footer.hbs
+<footer class="footer">This is footer</footer>
+my_temp/views/index.hbs
+<style>
+.footer{
+background-color:blue;
+}
+</style>
+{{>footer}}
+
+
+
