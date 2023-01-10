@@ -1,0 +1,286 @@
+<> </>    [, ,]   <div></div>. <React.Fragment></React.Fragment>
+
+How to use JavaScript inside JSX 
+using {}
+
+Template Literals(3 ways to write)
+1) Helllo {name} your age is {age}
+2) The name and age is {name +" "+age}
+3) {`Hello guys I am ${name} and I am ${age} years old `}
+
+const date = new Date().toLocaleDateString();
+const time = new Date().toLocaleTimeString();
+<h4 contentEditable="true">{date + " " + time}</h4>
+
+import "./index.css"; 
+<h5 className="heading">Good eve</h5>
+
+index.html
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+index.css
+.heading{
+        color:blue;                                           border:2px solid red;
+        font-family: 'Rubik Bubbles', cursive;     
+   }
+
+Inline 
+<p style={{color:'pink',textTransform:'capitalize',border:'2px solid black'}}> This is paragraph </p>
+
+Internal
+const my_style = {
+        color:"red",
+        textAlign:"center"
+}
+<h6 style={my_style}> This is h6</h6>
+
+const time = new Date().getHours();
+
+Head.jsx
+function Head(){
+return(<h1>Hello </h1>);
+}
+export default Head;
+
+index.js
+ReactDOM.render(
+<><Head/></>,
+document.getElementById("root"));
+
+import Greet, {myFavDish} from "./Greet";
+<ol> 
+<li>{myFavDish}</li>
+<li>{Greet()}</li>
+</ol>
+
+function Greet(){
+return(
+<>Hello</>);}
+const myFavDish = "Chocolate";
+export default Greet;
+export {myFavDish};
+
+PROPS
+function Card(props){
+ return(
+   <>
+      <h1>{props.title}</h1>
+      <p>{props.para}</p>
+    </>);}
+
+ReactDOM.render(
+   <>
+      <Card  title="Title 1" para="Para1"/ >
+      <Card  title="Title 2" para="Para2" />
+      <Card  title="Title 3" para="Para3" />
+      <Card  title="Title 5" para="Para5" />
+   </>  , document.getElementById('root'));
+
+<Card  title={Sdata[0].title}
+                genre={Sdata[0].genre} />
+
+{Sdata.map((val)=>{
+           return(<Card  title={val.title}
+                genre={val.genre} />);
+   })}
+
+
+key = {val.id} 
+(condition) ? true : false 
+let {x,y,z} = props ;
+
+HOOKS
+import React,{useState} from "react";
+const App =()=>{
+ let [count , setCount] = useState(0);
+ const IncNum = ()=>{
+        setCount(count++); }
+ return(
+   <>
+    <h1> {count} </h1>
+    <button onClick = {IncNum}>Click </button>
+   </>);}
+export default App;
+
+FORM
+const App =()=>{
+ const [name,setName]=useState("");
+ const [fullname,setFull]=useState("");
+ const Eve =(event)=>{
+ setName(event.target.value); }
+ const Sub=()=>{
+ setFull(name);}
+ return(
+   <>
+    <h1> Hello {fullname}  </h1>
+    <input type="text" onChange={Eve} value={name}  />
+    <button onClick={Sub}>Click </button>   </> );}
+
+const App =()=>{
+ const [name,setName]=useState("");                         const [fullname,setFull]=useState("");
+const Eve =(event)=>{                                  
+     setName(event.target.value); }
+const Sub=(e)=>{
+ e.preventDefault();
+ setFull(name);} 
+return(
+   <>
+    <form onSubmit={Sub}>
+     <h1> Hello {fullname} </h1>
+     <input type="text" onChange={Eve} value={name}  />
+     <button type="submit">Click </button>
+    </form>
+   </> );}
+
+2 code more 
+
+Material UI 
+NPM react-digital-clock
+Bootstrap -> install bootstrap and then include bootstrap.min.css file in the App.js
+
+App.js
+import React,{createContext} from "react";
+import CompA from "./CompA";
+const First = createContext();
+const App =()=>{
+        return(
+         <>
+            <First.Provider value={"Safa"}>
+              <CompA />
+            </First.Provider>
+         </>
+        );
+}
+export default App;
+export {First} ;
+
+CompC.js
+import {First} from "./App";
+const CompC =()=>{
+        return(
+         <>
+           <First.Consumer>
+                {(first)=>{
+                  return(<h1>{first} </h1> );
+                }}
+           </First.Consumer>
+         </>  );}
+export default CompC;
+
+useContext-> shares data like props
+import React,{useContext} from "react";
+import {First,Last} from "./App";
+const CompC =()=>{
+        const first = useContext(First);
+        const last = useContext(Last);
+        return(
+         <>
+           <h1>Hello {first} {last}</h1>
+         </>);}
+export default CompC;
+
+useEffect -> is called after page is render
+import React,{useState,useEffect} from "react";
+const App =()=>{
+const [num,setNum]=useState(0);
+const [nums,setNums]=useState(0);
+useEffect(()=>{
+  alert("Gwenchana??");
+},[nums]);
+const Inc=()=>{setNum(num+1);}
+const Incr=()=>{setNums(num+1);} return(
+         <><button onClick={Inc}>Click {num}</button>
+           <button onClick={Incr}>Click {nums}</button></> );}
+export default App;
+
+useEffect(()=>{
+  document.title = `You clicked me ${num} times`;
+});
+
+Axios
+const Axi =()=>{
+const [num,setNum]=useState("");
+const [name,setName]=useState("");
+const [move,setMove]=useState("");
+useEffect(()=>{                                            async function getData(){
+const req = await axios.get(`https://pokeapi.co/api/v2/pokemon/${num}`);
+           setName(req.data.name);
+         setMove(req.data.moves.length); }
+        getData();});
+function Eve(e){
+setNum(e.target.value);}                                                                     
+return(
+  <>
+   <h2> You have selected {num} value</h2>
+   <h3> {name} </h3>
+   <h4> {move} </h4>                                                     <select value={num} onChange={Eve}>
+        <option value="2">2</option>
+        <option value="25">25</option>
+        <option value="1">1</option>
+        <option value="5">5</option>
+   </select>
+</>);}                                                                     export default Axi;
+
+App.js
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Aaa from "./Aaa";
+import Ccc from "./Ccc";
+const App = ()=>{
+        return( <>
+           <Routes>
+                <Route exact path="/" element={<Aaa/>} />
+                <Route  path="/contact" element={<Ccc/>} />
+           </Routes></>);};
+export default App;
+
+index.js
+import {BrowserRouter} from "react-router-dom";
+import App from "./App";
+ReactDOM.render(
+<><BrowserRouter>
+ <App /></BrowserRouter></>,
+ document.getElementById("root"));
+
+import {Link} from "react-router-dom";
+const Navbar=()=>{
+        return(<> <Link to="/"> About </Link>
+<Link to="/contact"> Contact</Link></>
+ );}
+export default Navbar;
+
+import React from "react";
+import {useParams} from "react-router-dom";
+const User =()=>{
+ const {fname,lname} = useParams();      
+ return( 
+<h1> Hello {fname} {lname} </h1>); }
+export default User;
+
+to="/user/:fname/:lname";
+
+useLocation useHistory Redirect
+
+
+Image filter
+import Simg from "./Simg";
+const Ccc=(props)=>{
+        const [img,setImg] = useState("");
+        const Eve =(e)=>{
+                setImg(e.target.value); }
+        return(
+        <><h2> Cccc {props.name} </h2>
+         <input type="text" value={img} onChange={Eve} />
+         <Simg name={img} />  </>
+        );  }
+
+Sing.js
+const Simg=(props)=>{                                                   const imag = `https://source.unsplash.com/400x300/?${props.name}`;
+        return(
+           <> <img src={imag} alt="search" /> </>  );}
+
+Error 
+<Route path="*" element={Err} />
+const Err =()=>{
+         return(
+                 <>Oops
+                 <NavLink to="/"> Go back</NavLink></>  );}
